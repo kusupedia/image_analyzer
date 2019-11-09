@@ -13,3 +13,8 @@ sudo yum install cmake
 yum install python-devel
 pip install -r requirements.txt
 ```
+
+# unittest
+```
+python -m unittest discover
+```
