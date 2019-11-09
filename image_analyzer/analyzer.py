@@ -4,15 +4,22 @@ from image_analyzer.sqs_wrapper import SQSWrapper
 import io
 import urllib.request
 from PIL import Image
+import logging
+from logging import config
 
 
 class Analyzer:
     def __init__(self):
+        config.fileConfig('conf/logging.conf', disable_existing_loggers=False)
+        self.logger = logging.getLogger(__name__)
+
         self.sqs = SQSWrapper()
+        self.logger.info('application initialize complete')
 
     def run(self):
         while True:
             tweets = self.sqs.fetch_tweet()
+            self.logger.info('tweet count: %d', len(tweets))
             for tweet in tweets:
                 self.analyze(tweet)
 
@@ -21,7 +28,8 @@ class Analyzer:
         image_urls = tweet['image_urls']
         for image_url in image_urls:
             if self.img_analyze(image_url) == True:
-                # self.sqs.retweet(tweet_id)
+                self.sqs.retweet(tweet_id)
+                self.logger.info('tweet count: %d', tweet_id)
                 break
 
     def img_analyze(self, image_url):
