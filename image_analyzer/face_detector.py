@@ -1,3 +1,4 @@
+# coding:utf-8
 from PIL import Image, ImageDraw
 import PIL
 import os
@@ -23,7 +24,7 @@ class FaceDetector:
 
         #resize_img = img.convert('RGB')
 
-        # OpenCVによる検出
+        # OpenCV
         cv_list = self.opencv_detects(img)
 
         # face recognitionによる検出

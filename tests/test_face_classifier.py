@@ -1,3 +1,4 @@
+# coding:utf-8
 import unittest
 
 from image_analyzer.face_classifier import FaceClassifier

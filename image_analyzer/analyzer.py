@@ -1,3 +1,4 @@
+# coding:utf-8
 from image_analyzer.face_classifier import FaceClassifier
 from image_analyzer.face_detector import FaceDetector
 from image_analyzer.sqs_wrapper import SQSWrapper
