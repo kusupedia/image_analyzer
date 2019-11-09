@@ -1,0 +1,6 @@
+boto3
+tensorflow
+numpy
+PIL
+cv2
+face_recognition
