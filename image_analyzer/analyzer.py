@@ -14,7 +14,6 @@ class Analyzer:
         while True:
             tweets = self.sqs.fetch_tweet()
             for tweet in tweets:
-                print(tweet)
                 self.analyze(tweet)
 
     def analyze(self, tweet):
@@ -29,7 +28,6 @@ class Analyzer:
         f = io.BytesIO(urllib.request.urlopen(image_url).read())
         img = Image.open(f)
 
-        print(img)
         faceDetector = FaceDetector()
         faceClassifier = FaceClassifier()
 

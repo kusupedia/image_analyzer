@@ -2,5 +2,5 @@ boto3
 tensorflow
 numpy
 PIL
-cv2
+opencv-python
 face_recognition
