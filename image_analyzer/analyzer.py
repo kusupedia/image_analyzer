@@ -42,7 +42,7 @@ class Analyzer:
         faces = self.faceDetector.detect(img)
         max_match_rate = 0
         for face in faces:
-            predict_class, predict_proba = self.faceClassifier.predict(face)
-            if predict_class == 0 and predict_proba > 90.0:
+            predict_proba = faceClassifier.predict(face)
+            if predict_proba < 0.06:
                 return True
         return False

@@ -16,6 +16,7 @@ class TestFaceClassifier(unittest.TestCase):
         shutil.rmtree('./test_out/')
         os.mkdir('./test_out')
         image_url = 'https://pbs.twimg.com/media/EHYzDHdUwAAFU2t.jpg'
+        image_url = 'https://pbs.twimg.com/media/CDr7GM4UkAIB8lS.jpg'
         f = io.BytesIO(urllib.request.urlopen(image_url).read())
         img = Image.open(f)
         faceDetector = FaceDetector()
@@ -26,11 +27,11 @@ class TestFaceClassifier(unittest.TestCase):
         i = 0
         for face in faces:
             face.save("./test_out/" + str(i) + ".jpg", "JPEG")
-            predict_class, predict_proba = faceClassifier.predict(face)
-            if predict_class == 0:
-                print("true!")
-            print('class:' + str(predict_class))
-            print('proba' + str(predict_proba))
+            predict_proba = faceClassifier.predict(face)
+            if predict_proba < 0.10:
+                print("kusuda!")
+            else:
+                print('other!')
             i += 1
 
 
