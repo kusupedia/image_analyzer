@@ -19,10 +19,10 @@ class FaceDetector:
 
     def detect(self, img):
 
-        # if img.width > 1024:
-        #     resize_img = self.scale_to_width(img, 1024)
+        if img.width > 1920:
+             img = self.scale_to_width(img, 1920)
 
-        #resize_img = img.convert('RGB')
+        img = img.convert('RGB')
 
         # OpenCV
         cv_list = self.opencv_detects(img)
