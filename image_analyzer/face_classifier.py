@@ -19,4 +19,5 @@ class FaceClassifier:
             IMG_SIZE, IMG_SIZE, 3)
         img /= 255.0
         predict_classes = self. model.predict_classes(np.array([img]), 1)
-        return predict_classes[0]
+        predict_proba = self. model.predict_proba(np.array([img]), 1)
+        return predict_classes[0], predict_proba[0]

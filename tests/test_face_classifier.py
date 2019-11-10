@@ -15,7 +15,7 @@ class TestFaceClassifier(unittest.TestCase):
     def test_detect(self):
         shutil.rmtree('./test_out/')
         os.mkdir('./test_out')
-        image_url = 'https://pbs.twimg.com/media/EHfTIHtU8AA1qQW.jpg'
+        image_url = 'https://pbs.twimg.com/media/EHYzDHdUwAAFU2t.jpg'
         f = io.BytesIO(urllib.request.urlopen(image_url).read())
         img = Image.open(f)
         faceDetector = FaceDetector()
@@ -26,10 +26,11 @@ class TestFaceClassifier(unittest.TestCase):
         i = 0
         for face in faces:
             face.save("./test_out/" + str(i) + ".jpg", "JPEG")
-            predict_class = faceClassifier.predict(face)
+            predict_class, predict_proba = faceClassifier.predict(face)
             if predict_class == 0:
                 print("true!")
             print('class:' + str(predict_class))
+            print('proba' + str(predict_proba))
             i += 1
 
 
