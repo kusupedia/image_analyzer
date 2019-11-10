@@ -15,6 +15,8 @@ class Analyzer:
         self.logger = logging.getLogger(__name__)
 
         self.sqs = SQSWrapper()
+        self.faceDetector = FaceDetector()
+        self.faceClassifier = FaceClassifier()
         self.logger.info('application initialize complete')
 
     def run(self):
@@ -37,12 +39,10 @@ class Analyzer:
         f = io.BytesIO(urllib.request.urlopen(image_url).read())
         img = Image.open(f)
 
-        faceDetector = FaceDetector()
-        faceClassifier = FaceClassifier()
-
-        faces = faceDetector.detect(img)
-        max_match_rate = faceClassifier.classificate(faces)
-
-        if max_match_rate > 95:
-            return True
+        faces = self.faceDetector.detect(img)
+        max_match_rate = 0
+        for face in faces:
+            predict_class = self.faceClassifier.predict(face)
+            if predict_class == 0:
+                return True
         return False

@@ -77,7 +77,7 @@ class FaceDetector:
         list = []
 
         i = 0
-        for j in range(-2, 3):
+        for j in range(-1, 2):
             # 拡大画像の作成
             big_img = np.zeros((org_height * 2, org_width * 2, 3), np.uint8)
             big_img[ceil(org_height/2.0):ceil(org_height/2.0*3.0),
