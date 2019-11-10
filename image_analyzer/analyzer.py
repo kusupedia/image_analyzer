@@ -46,6 +46,7 @@ class Analyzer:
         for word in include_words:
             if word in text:
                 self.logger.info('text: %s', text)
+                self.sqs.retweet(tweet_id)  # temporary insert
                 return True
 
         faces = self.faceDetector.detect(img)
