@@ -31,7 +31,7 @@ class Analyzer:
         image_urls = tweet['image_urls']
         for image_url in image_urls:
             if self.img_analyze(image_url) == True:
-                self.sqs.retweet(tweet_id)
+                # self.sqs.retweet(tweet_id)
                 self.logger.info('tweet id: %s', str(tweet_id))
                 break
 
@@ -42,7 +42,9 @@ class Analyzer:
         faces = self.faceDetector.detect(img)
         max_match_rate = 0
         for face in faces:
-            predict_proba = faceClassifier.predict(face)
-            if predict_proba < 0.06:
+            predict_proba = self.faceClassifier.predict(face)
+            if predict_proba < 0.01:
+                self.logger.info('url: %s proba: %s', image_url,
+                                 str(predict_proba))
                 return True
         return False

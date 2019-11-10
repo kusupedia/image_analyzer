@@ -29,6 +29,7 @@ class TestFaceClassifier(unittest.TestCase):
             face.save("./test_out/" + str(i) + ".jpg", "JPEG")
             predict_proba = faceClassifier.predict(face)
             if predict_proba < 0.10:
+                print(predict_proba)
                 print("kusuda!")
             else:
                 print('other!')

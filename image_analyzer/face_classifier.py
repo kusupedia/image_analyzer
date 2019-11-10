@@ -19,6 +19,5 @@ class FaceClassifier:
             IMG_SIZE, IMG_SIZE, 3)
         img /= 255.0
         predicts = self. model.predict(np.array([img]), 1)
-        print(predicts)
 
         return predicts[0]
