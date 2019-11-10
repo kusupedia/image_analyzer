@@ -4,3 +4,4 @@ numpy
 PIL
 opencv-python
 face_recognition
+pytesseract

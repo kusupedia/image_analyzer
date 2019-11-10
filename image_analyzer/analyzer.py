@@ -2,6 +2,7 @@
 from image_analyzer.face_classifier import FaceClassifier
 from image_analyzer.face_detector import FaceDetector
 from image_analyzer.sqs_wrapper import SQSWrapper
+from image_analyzer.ocr import OCR
 import io
 import urllib.request
 from PIL import Image
@@ -17,6 +18,7 @@ class Analyzer:
         self.sqs = SQSWrapper()
         self.faceDetector = FaceDetector()
         self.faceClassifier = FaceClassifier()
+        self.ocr = OCR()
         self.logger.info('application initialize complete')
 
     def run(self):
@@ -38,6 +40,13 @@ class Analyzer:
     def img_analyze(self, image_url, tweet_id):
         f = io.BytesIO(urllib.request.urlopen(image_url).read())
         img = Image.open(f)
+
+        text = self.ocr.get_string(img)
+        include_words = ['kusudaaina', '楠田亜衣奈']
+        for word in include_words:
+            if word in text:
+                self.logger.info('text: %s', text)
+                return True
 
         faces = self.faceDetector.detect(img)
         max_match_rate = 0
