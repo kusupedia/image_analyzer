@@ -32,7 +32,7 @@ class Analyzer:
         for image_url in image_urls:
             if self.img_analyze(image_url) == True:
                 self.sqs.retweet(tweet_id)
-                self.logger.info('tweet count: %d', tweet_id)
+                self.logger.info('tweet id: %s', str(tweet_id))
                 break
 
     def img_analyze(self, image_url):
