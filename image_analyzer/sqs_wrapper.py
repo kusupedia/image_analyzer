@@ -22,7 +22,7 @@ class SQSWrapper:
         response = self.sqs.receive_message(
             QueueUrl=self.img_queue_url,
             AttributeNames=['SentTimestamp'],
-            MaxNumberOfMessages=20,
+            MaxNumberOfMessages=10,
             MessageAttributeNames=['All'],
             WaitTimeSeconds=20
         )
